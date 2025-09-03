@@ -1,6 +1,6 @@
 # Publishing Guide
 
-This guide covers the complete publishing process for the oasis-rofl-client-rube package.
+This guide covers the complete publishing process for the oasis-rofl-client-py-rube package.
 
 ## Automatic Versioning
 
@@ -100,7 +100,7 @@ source test-env/bin/activate  # Windows: test-env\Scripts\activate
 # Install from TestPyPI
 uv pip install --index-url https://test.pypi.org/simple/ \
                --extra-index-url https://pypi.org/simple/ \
-               oasis-rofl-client-rube
+               oasis-rofl-client-py-rube
 
 # Test the package
 uv run python -c "from oasis_rofl_client import Client; print(Client().ping())"
@@ -162,5 +162,5 @@ Always verify on TestPyPI first:
 ```bash
 uv pip install --index-url https://test.pypi.org/simple/ \
                --extra-index-url https://pypi.org/simple/ \
-               oasis-rofl-client-rube
+               oasis-rofl-client-py-rube
 ```

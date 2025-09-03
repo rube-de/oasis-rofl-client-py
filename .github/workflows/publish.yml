@@ -62,7 +62,7 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/oasis-rofl-client-rube
+      url: https://test.pypi.org/p/oasis-rofl-client-py-rube
     steps:
     - name: Download artifacts
       uses: actions/download-artifact@v4
@@ -84,10 +84,10 @@ jobs:
     - name: Report TestPyPI URL
       run: |
         echo "✅ Published to TestPyPI!"
-        echo "🔗 View at: https://test.pypi.org/project/oasis-rofl-client-rube/"
+        echo "🔗 View at: https://test.pypi.org/project/oasis-rofl-client-py-rube/"
         echo ""
         echo "To test installation:"
-        echo "  uv pip install --index-url https://test.pypi.org/simple/ oasis-rofl-client-rube"
+        echo "  uv pip install --index-url https://test.pypi.org/simple/ oasis-rofl-client-py-rube"
 
   publish-to-pypi:
     needs: build
@@ -96,7 +96,7 @@ jobs:
     if: github.event_name == 'release'
     environment:
       name: pypi
-      url: https://pypi.org/p/oasis-rofl-client-rube
+      url: https://pypi.org/p/oasis-rofl-client-py-rube
     steps:
     - name: Download artifacts
       uses: actions/download-artifact@v4
@@ -124,7 +124,7 @@ jobs:
     - name: Report PyPI URL
       run: |
         echo "✅ Published to PyPI!"
-        echo "🔗 View at: https://pypi.org/project/oasis-rofl-client-rube/"
+        echo "🔗 View at: https://pypi.org/project/oasis-rofl-client-py-rube/"
         echo ""
         echo "To install:"
-        echo "  uv pip install oasis-rofl-client-rube"
+        echo "  uv pip install oasis-rofl-client-py-rube"

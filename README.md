@@ -1,20 +1,20 @@
-# oasis-rofl-client-rube
+# oasis-rofl-client-py-rube
 
 [![Publish to PyPI](https://github.com/rube-de/oasis-rofl-client-py/actions/workflows/publish.yml/badge.svg)](https://github.com/rube-de/oasis-rofl-client-py/actions/workflows/publish.yml)
-[![PyPI version](https://badge.fury.io/py/oasis-rofl-client-rube.svg)](https://badge.fury.io/py/oasis-rofl-client-rube)
+[![PyPI version](https://badge.fury.io/py/oasis-rofl-client-py-rube.svg)](https://badge.fury.io/py/oasis-rofl-client-py-rube)
 
 Python client SDK for Oasis ROFL (Runtime Off-chain Logic).
 
 ## Installation
 
 ```bash
-pip install oasis-rofl-client-rube
+pip install oasis-rofl-client-py-rube
 ```
 
 Or using [uv](https://docs.astral.sh/uv/):
 
 ```bash
-uv add install oasis-rofl-client-rube
+uv add install oasis-rofl-client-py-rube
 ```
 
 The package requires Python 3.9+ and depends on `httpx` for async HTTP operations.

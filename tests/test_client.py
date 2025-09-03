@@ -24,7 +24,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         client = RoflClient(url="/custom/socket.sock")
         self.assertEqual(client.url, "/custom/socket.sock")
 
-    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
     async def test_generate_key(self, mock_client_class):
         """Test generate_key method."""
         # Setup mock
@@ -50,7 +50,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
             timeout=60.0
         )
 
-    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
     async def test_generate_key_with_http_url(self, mock_client_class):
         """Test generate_key method with HTTP URL."""
         # Setup mock
@@ -76,8 +76,8 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
             timeout=60.0
         )
 
-    @patch('src.oasis_rofl_client.client.httpx.AsyncHTTPTransport')
-    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncHTTPTransport')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
     async def test_unix_socket_transport(self, mock_client_class, mock_transport_class):
         """Test that Unix socket transport is used correctly."""
         # Setup mocks
@@ -100,8 +100,8 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         mock_transport_class.assert_called_once_with(uds="/run/rofl-appd.sock")
         mock_client_class.assert_called_once_with(transport=mock_transport)
 
-    @patch('src.oasis_rofl_client.client.httpx.AsyncHTTPTransport')
-    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncHTTPTransport')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
     async def test_custom_socket_transport(self, mock_client_class, mock_transport_class):
         """Test that custom socket path is used correctly."""
         # Setup mocks
@@ -124,7 +124,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         mock_transport_class.assert_called_once_with(uds="/custom/path.sock")
         mock_client_class.assert_called_once_with(transport=mock_transport)
 
-    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
     async def test_generate_key_with_ed25519(self, mock_client_class):
         """Test generate_key with Ed25519 key kind."""
         # Setup mock
@@ -150,7 +150,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
             timeout=60.0
         )
 
-    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
     async def test_generate_key_with_raw_256(self, mock_client_class):
         """Test generate_key with RAW_256 entropy."""
         # Setup mock
@@ -176,7 +176,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
             timeout=60.0
         )
 
-    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
     async def test_generate_key_with_raw_384(self, mock_client_class):
         """Test generate_key with RAW_384 entropy."""
         # Setup mock

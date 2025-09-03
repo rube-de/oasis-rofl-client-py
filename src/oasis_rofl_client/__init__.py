@@ -11,4 +11,4 @@ __all__ = [
 ]
 
 from .__about__ import __version__
-from .client import RoflClient, KeyKind
+from .rofl_client import RoflClient, KeyKind

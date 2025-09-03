@@ -1,7 +1,6 @@
 """ROFL client for interacting with ROFL runtime services.
 
-Provides methods for key generation and transaction submission
-through the ROFL application daemon.
+Provides methods for key generation through the ROFL application daemon.
 """
 from __future__ import annotations
 
@@ -32,9 +31,8 @@ class KeyKind(Enum):
 
 class RoflClient:
     """Client for interacting with ROFL runtime services.
-    
-    Provides methods for key fetching and transaction submission
-    through the ROFL application daemon.
+
+    Provides methods for key fetching through the ROFL application daemon.
     """
     
     ROFL_SOCKET_PATH: str = "/run/rofl-appd.sock"

@@ -10,7 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 import httpx
-from oasis_rofl_client import RoflClient
+from oasis_rofl_client import RoflClient, KeyKind
 
 # Configure logging
 logging.basicConfig(
@@ -64,12 +64,31 @@ async def example_multiple_keys():
         print(f"Error during batch generation: {e}")
 
 
+async def example_with_different_key_kinds():
+    """Demonstrate generating different types of keys."""
+    client = RoflClient()
+    
+    key_types = [
+        ("secp256k1-key", KeyKind.SECP256K1, "SECP256K1 private key"),
+        ("ed25519-key", KeyKind.ED25519, "Ed25519 private key"),
+        ("entropy-256", KeyKind.RAW_256, "256 bits of raw entropy"),
+        ("entropy-384", KeyKind.RAW_384, "384 bits of raw entropy"),
+    ]
+    
+    for key_id, kind, description in key_types:
+        try:
+            key = await client.generate_key(key_id, kind=kind)
+            print(f"{description} ({key_id}): {key[:16]}...")
+        except Exception as e:
+            print(f"Failed to generate {description}: {e}")
+
+
 async def example_with_error_handling():
     """Demonstrate comprehensive error handling."""
     client = RoflClient()
     
     try:
-        key = await client.generate_key("test-key")
+        key = await client.generate_key("test-key", kind=KeyKind.SECP256K1)
         print(f"Success: {key}")
         
     except httpx.HTTPStatusError as e:
@@ -102,7 +121,11 @@ async def main():
     await example_multiple_keys()
     print()
     
-    print("4. Error Handling Example:")
+    print("4. Different Key Kinds Example:")
+    await example_with_different_key_kinds()
+    print()
+    
+    print("5. Error Handling Example:")
     await example_with_error_handling()
 
 

@@ -6,8 +6,9 @@ Oasis ROFL services, including key generation and transaction submission.
 
 __all__ = [
     "RoflClient",
+    "KeyKind",
     "__version__",
 ]
 
 from .__about__ import __version__
-from .client import RoflClient
+from .client import RoflClient, KeyKind

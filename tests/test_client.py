@@ -1,8 +1,8 @@
-w"""Tests for RoflClient."""
+"""Tests for RoflClient."""
 
 import unittest
 from unittest.mock import AsyncMock, MagicMock, patch
-from src.oasis_rofl_client import RoflClient
+from src.oasis_rofl_client import RoflClient, KeyKind
 
 
 class TestRoflClient(unittest.IsolatedAsyncioTestCase):
@@ -123,6 +123,91 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         # Verify custom socket transport was created
         mock_transport_class.assert_called_once_with(uds="/custom/path.sock")
         mock_client_class.assert_called_once_with(transport=mock_transport)
+
+    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    async def test_generate_key_with_ed25519(self, mock_client_class):
+        """Test generate_key with Ed25519 key kind."""
+        # Setup mock
+        mock_response = MagicMock()
+        mock_response.json.return_value = {"key": "0xed25519key"}
+        mock_response.raise_for_status = MagicMock()
+        
+        mock_client = AsyncMock()
+        mock_client.post.return_value = mock_response
+        mock_client_class.return_value.__aenter__.return_value = mock_client
+        
+        # Test key generation with Ed25519
+        client = RoflClient()
+        key = await client.generate_key("ed25519-key", kind=KeyKind.ED25519)
+        
+        # Verify the result
+        self.assertEqual(key, "0xed25519key")
+        
+        # Verify the API call uses ed25519
+        mock_client.post.assert_called_once_with(
+            "http://localhost/rofl/v1/keys/generate",
+            json={"key_id": "ed25519-key", "kind": "ed25519"},
+            timeout=60.0
+        )
+
+    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    async def test_generate_key_with_raw_256(self, mock_client_class):
+        """Test generate_key with RAW_256 entropy."""
+        # Setup mock
+        mock_response = MagicMock()
+        mock_response.json.return_value = {"key": "0xraw256entropy"}
+        mock_response.raise_for_status = MagicMock()
+        
+        mock_client = AsyncMock()
+        mock_client.post.return_value = mock_response
+        mock_client_class.return_value.__aenter__.return_value = mock_client
+        
+        # Test key generation with RAW_256
+        client = RoflClient()
+        key = await client.generate_key("entropy-256", kind=KeyKind.RAW_256)
+        
+        # Verify the result
+        self.assertEqual(key, "0xraw256entropy")
+        
+        # Verify the API call uses raw-256
+        mock_client.post.assert_called_once_with(
+            "http://localhost/rofl/v1/keys/generate",
+            json={"key_id": "entropy-256", "kind": "raw-256"},
+            timeout=60.0
+        )
+
+    @patch('src.oasis_rofl_client.client.httpx.AsyncClient')
+    async def test_generate_key_with_raw_384(self, mock_client_class):
+        """Test generate_key with RAW_384 entropy."""
+        # Setup mock
+        mock_response = MagicMock()
+        mock_response.json.return_value = {"key": "0xraw384entropy"}
+        mock_response.raise_for_status = MagicMock()
+        
+        mock_client = AsyncMock()
+        mock_client.post.return_value = mock_response
+        mock_client_class.return_value.__aenter__.return_value = mock_client
+        
+        # Test key generation with RAW_384
+        client = RoflClient()
+        key = await client.generate_key("entropy-384", kind=KeyKind.RAW_384)
+        
+        # Verify the result
+        self.assertEqual(key, "0xraw384entropy")
+        
+        # Verify the API call uses raw-384
+        mock_client.post.assert_called_once_with(
+            "http://localhost/rofl/v1/keys/generate",
+            json={"key_id": "entropy-384", "kind": "raw-384"},
+            timeout=60.0
+        )
+
+    def test_key_kind_enum_values(self):
+        """Test that KeyKind enum has correct values."""
+        self.assertEqual(KeyKind.RAW_256.value, "raw-256")
+        self.assertEqual(KeyKind.RAW_384.value, "raw-384")
+        self.assertEqual(KeyKind.ED25519.value, "ed25519")
+        self.assertEqual(KeyKind.SECP256K1.value, "secp256k1")
 
 
 if __name__ == '__main__':

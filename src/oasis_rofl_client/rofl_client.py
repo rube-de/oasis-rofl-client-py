@@ -90,7 +90,7 @@ class RoflClient:
         """
         payload: dict[str, str] = {
             "key_id": key_id,
-            "kind": kind.value
+            "kind": kind.value,
         }
 
         path: str = '/rofl/v1/keys/generate'

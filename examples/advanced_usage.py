@@ -15,7 +15,7 @@ from oasis_rofl_client import RoflClient, KeyKind
 # Configure logging
 logging.basicConfig(
     level=logging.DEBUG,  # Set to DEBUG to see transport details
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
 )
 
 

@@ -47,7 +47,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         mock_client.post.assert_called_once_with(
             "http://localhost/rofl/v1/keys/generate",
             json={"key_id": "test-key-id", "kind": "secp256k1"},
-            timeout=60.0
+            timeout=60.0,
         )
 
     @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
@@ -147,7 +147,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         mock_client.post.assert_called_once_with(
             "http://localhost/rofl/v1/keys/generate",
             json={"key_id": "ed25519-key", "kind": "ed25519"},
-            timeout=60.0
+            timeout=60.0,
         )
 
     @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
@@ -173,7 +173,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         mock_client.post.assert_called_once_with(
             "http://localhost/rofl/v1/keys/generate",
             json={"key_id": "entropy-256", "kind": "raw-256"},
-            timeout=60.0
+            timeout=60.0,
         )
 
     @patch('src.oasis_rofl_client.rofl_client.httpx.AsyncClient')
@@ -199,7 +199,7 @@ class TestRoflClient(unittest.IsolatedAsyncioTestCase):
         mock_client.post.assert_called_once_with(
             "http://localhost/rofl/v1/keys/generate",
             json={"key_id": "entropy-384", "kind": "raw-384"},
-            timeout=60.0
+            timeout=60.0,
         )
 
     def test_key_kind_enum_values(self):

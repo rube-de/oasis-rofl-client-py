@@ -14,7 +14,7 @@ from oasis_rofl_client import RoflClient, KeyKind
 # Configure logging to see debug messages
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
 )
 
 

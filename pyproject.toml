@@ -34,7 +34,9 @@ Homepage = "https://github.com/rube-de/oasis-rofl-client-py"
 [tool.hatch.version]
 source = "vcs"
 fallback-version = "0.0.0"
-raw-options = { tag_regex = '^rofl-client/py/(?P<version>v\\d+\\.\\d+\\.\\d+.*)$' }
+
+[tool.hatch.version.raw-options]
+tag_regex = '^rofl-client/py/v(?P<version>\d+\.\d+\.\d+(?:[\w.-]*)?)$'
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/oasis_rofl_client/_version.py"
